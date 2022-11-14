@@ -31,8 +31,16 @@ public class Writer
     }
 
     public void writeHighScorePosition(String nickName, int position, int wrongGuesses) {
+        System.out.println("Herzlichen Glückwunsch " + nickName);
+        System.out.println("Mit "+ wrongGuesses+ " Fehlversuchen. Bist du auf Platz "+ position+"!");
     }
 
-    public void writeHighScores(Highscore highScore, int i) {
+    public void writeHighScores(Highscore highScore, int count) {
+        System.out.println("HIGHSCORES");
+        System.out.println("----------");
+        String[] values = highScore.getHighScore(count);
+        for (String entry : values) {
+            System.out.println(entry);
+        }
     }
 }
