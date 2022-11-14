@@ -64,6 +64,7 @@ public class Game
         } else if(nickName.length()>0 && (mail.length()>0 && dsgvo)) {
             ExtendedPlayerData entry = new ExtendedPlayerData(nickName, this.WrongGuesses, mail, dsgvo);
             position = this.HighScore.addNewEntry(entry);
+            CandidateWriter.writeBewerberdaten(entry, "bewerbert.txt");
         }
 
         this.Writer.writeHighScorePosition(nickName, position, this.WrongGuesses);

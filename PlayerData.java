@@ -37,7 +37,7 @@ public class PlayerData implements Comparable<PlayerData>, Serializable {
 
     @Override
     public void deserialize(String values) {
-        String[] data  = values.split("#@#");
+        String[] data  = values.split("@#@");
         this.nickName = data[0];
         this.score =  Integer.parseInt(data[1]);
     }
