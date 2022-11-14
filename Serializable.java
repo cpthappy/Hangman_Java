@@ -1,4 +1,4 @@
-public interface Serializable<T> {
-    public String serialize(T object);
-    public void deserialize(String str, T object);
+public interface Serializable{
+    public String serialize();
+    public void deserialize(String values);
 }

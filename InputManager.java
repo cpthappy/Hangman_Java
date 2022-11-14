@@ -38,4 +38,51 @@ public class InputManager
         
         return guess;
     }
+
+    public String getNickName() throws IOException{
+        boolean valid = false;
+        String name = "";
+        do {
+            System.out.print("Bitte gib deinen Nickname an: ");
+            
+            name = this.Reader.readLine();
+            valid = name.length() > 0;
+
+        } while(!valid);
+
+        return name;
+    }
+
+
+    public String getEmail() throws IOException{
+        boolean valid = false;
+        String mail = "";
+        do {
+            System.out.print("Bitte gib deinen E-Mail-Adresse an: ");
+            
+            mail = this.Reader.readLine();
+            valid = mail.length() > 0;
+            valid &= mail.contains("@");
+
+        } while(!valid);
+
+        return mail;
+    }
+
+    public boolean getDSGVO() throws IOException {
+      
+        System.out.print("Bist du mit der Speicherung deiner E-Mail-Adresse einverstanden (j = JA): ");
+        String eingabe = this.Reader.readLine();
+
+        return eingabe.toLowerCase().charAt(0) == 'j';
+    }
+
+
+    public boolean getEmailEingeben() throws IOException {
+      
+        System.out.print("Möchtest du deine E-Mail Adresse auch angeben? (j = JA): ");
+        String eingabe = this.Reader.readLine();
+
+        return eingabe.toLowerCase().charAt(0) == 'j';
+    }
 }

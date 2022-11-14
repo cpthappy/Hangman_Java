@@ -12,6 +12,7 @@ public class Game
     private InputManager InputManager;
     private Word CurrentWord;
     private int WrongGuesses;
+    private Highscore HighScore;
 
     /**
      * Konstruktor für Objekte der Klasse Game
@@ -21,6 +22,7 @@ public class Game
         this.Writer = new Writer();
         this.InputManager = new InputManager();
         this.WordList = new Wordlist("Wordlist.txt");
+        this.HighScore = new Highscore("highscores.txt");
     }
     
     /**
@@ -46,5 +48,29 @@ public class Game
             }
         }
         this.Writer.writeGameEnd(this.CurrentWord, this.WrongGuesses);
+
+        String nickName = this.InputManager.getNickName();
+        String mail = "";
+        Boolean dsgvo = false;
+        int position = -1;
+        if (this.InputManager.getEmailEingeben()) {
+            mail = this.InputManager.getEmail();
+            dsgvo = this.InputManager.getDSGVO();
+        }
+
+        if (nickName.length()>0 && !(mail.length()>0 && dsgvo)) {
+            PlayerData entry = new PlayerData(nickName, this.WrongGuesses);
+            position = this.HighScore.addNewEntry(entry);
+        } else if(nickName.length()>0 && (mail.length()>0 && dsgvo)) {
+            ExtendedPlayerData entry = new ExtendedPlayerData(nickName, this.WrongGuesses, mail, dsgvo);
+            position = this.HighScore.addNewEntry(entry);
+        }
+
+        this.Writer.writeHighScorePosition(nickName, position, this.WrongGuesses);
+        this.Writer.writeHighScores(this.HighScore, 5);
+        this.HighScore.save();
+
     }
+
+
 }

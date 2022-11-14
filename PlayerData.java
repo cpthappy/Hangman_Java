@@ -1,4 +1,4 @@
-public class PlayerData implements Comparable<PlayerData>, Serializable<PlayerData>{
+public class PlayerData implements Comparable<PlayerData>, Serializable {
     private String nickName;
     private int score;
 
@@ -31,13 +31,13 @@ public class PlayerData implements Comparable<PlayerData>, Serializable<PlayerDa
     }
 
     @Override
-    public String serialize(PlayerData object) {
+    public String serialize() {
         return this.nickName + "@#@" + this.score;
     }
 
     @Override
-    public void deserialize(String str) {
-        String[] data  = str.split("#@#",2);
+    public void deserialize(String values) {
+        String[] data  = values.split("#@#",2);
         this.nickName = data[0];
         this.score =  Integer.parseInt(data[1]);
     }

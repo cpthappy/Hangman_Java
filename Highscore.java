@@ -1,15 +1,21 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Highscore {
     private List<PlayerData> scoreList;
+    private String storagePath;
+    private ListSerializer<PlayerData> serializer;
 
     /**
      * 
      */
-    public Highscore() {
+    public Highscore(String path) {
+        this.serializer = new ListSerializer<>(PlayerData::new);
         this.scoreList = new ArrayList<PlayerData>();
+        this.storagePath = path;
+        this.readFromFile();
     }
 
     public int addNewEntry(PlayerData data) {
@@ -27,5 +33,23 @@ public class Highscore {
         }
 
         return result;
+    }
+
+    private void readFromFile() {
+        
+        try {
+            this.scoreList = this.serializer.deserialize(this.storagePath);
+        } catch (IOException e){
+            this.scoreList = new ArrayList<PlayerData>();
+        }
+    }
+
+    public void save() {
+        try {
+            this.serializer.serialize(this.scoreList, this.storagePath);
+        } catch (IOException e){
+            System.err.println("Highscore-Liste konnte nicht gespeichert werden");
+        }
+
     }
 }

@@ -29,4 +29,10 @@ public class Writer
         System.out.println(guessWord.getDisplayValue());
         System.out.println("Mit "+wrongGuesses + " Fehlversuchen gefunden");
     }
+
+    public void writeHighScorePosition(String nickName, int position, int wrongGuesses) {
+    }
+
+    public void writeHighScores(Highscore highScore, int i) {
+    }
 }
